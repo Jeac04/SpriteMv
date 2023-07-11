@@ -42,15 +42,12 @@ boolean m_Izquierda;
 
         // Carga las imágenes del sprite para cada dirección
         img =  herramienta. getImage(getClass().getResource("personaje.png"));
-        up = herramienta.getImage(getClass().getResource("up1.png"));
-        down = herramienta.getImage(getClass().getResource("down1.png"));
-        left = herramienta.getImage(getClass().getResource("left2.png"));
-        rigth= herramienta.getImage(getClass().getResource("right1.png"));
+        up = herramienta.getImage(getClass().getResource("down3.png"));
+        down = herramienta.getImage(getClass().getResource("up3.png"));
+        left = herramienta.getImage(getClass().getResource("left3.png"));
+        rigth= herramienta.getImage(getClass().getResource("right3.png"));
 
         hilo1.start();
-    }
-
-    private void addKeyListener(boolean b) {
     }
 
     @Override
@@ -61,8 +58,8 @@ boolean m_Izquierda;
         g2d = bi.createGraphics();
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 1600, 800);
-        int m_X= (increment % 5)*40;
-        int m_Y =(increment /5)*40;
+        int m_X= (increment % 5)*100;
+        int m_Y =(increment /5)*100;
 
         if (m_Arriba && characterY > 0) {
             characterY -=1;
@@ -80,38 +77,37 @@ boolean m_Izquierda;
             currentImage = img;
         }
 
-        g2d.drawImage(currentImage, characterX, characterY, characterX +300, characterY +300, m_X,m_Y,m_X +40, m_Y +40, this);
+        g2d.drawImage(currentImage, characterX, characterY, characterX +300, characterY +300, m_X,m_Y,m_X +100, m_Y +170, this);
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(170);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Sprite.class.getName()).log(Level.SEVERE, null, ex);
             }
             increment = increment +1;
-            if (increment > 4){
+            if (increment > 5){
                 increment =0;
             }
         }
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        int keyCode= e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_UP:
+    public void keyPressed(KeyEvent e) {;
+        switch (e.getKeyCode()) {
+            case 37:
                 m_Arriba= true;
                 break;
-            case KeyEvent.VK_DOWN:
+            case 38:
                 m_Abajo=true;
                 break;
-            case KeyEvent.VK_LEFT:
+            case 39:
                 m_Izquierda=true;
                 break;
-            case KeyEvent.VK_RIGHT:
+            case 40:
                 m_Derecha=true;
                 break;
         }
@@ -119,18 +115,17 @@ boolean m_Izquierda;
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        switch (keyCode) {
-           case KeyEvent.VK_UP:
+        switch (e.getKeyCode()) {
+           case 37:
                 m_Arriba= false;
                 break;
-            case KeyEvent.VK_DOWN:
+            case 38:
                 m_Abajo=false;
                 break;
-            case KeyEvent.VK_LEFT:
+            case 39:
                 m_Izquierda=false;
                 break;
-            case KeyEvent.VK_RIGHT:
+            case 40:
                 m_Derecha=false;
                 break;
         }
